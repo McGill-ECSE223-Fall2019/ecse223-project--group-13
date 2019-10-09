@@ -4,7 +4,9 @@ import java.sql.Time;
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.model.*;
 import ca.mcgill.ecse223.quoridor.controller.InvalidInputException;
-
+import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 /*Instructions from Iteration 2 part 3:
  * You need to individually specify all operations for your assigned features in the Controller interface (which interface needs to be placed in the ca.mcgill.ecse223.quoridor.controller package). The interface consists of the full method declaration (incl. parameters, return type, etc.) relevant for your assigned features. In addition to all modifier methods, do not forget to include all query methods required for the features. The same query method may be used for several features. As a team, ensure the consistent use of query methods across features.
@@ -80,8 +82,32 @@ public class QuoridorController {
 	//6. Grab wall -- Raja
 	//7. Move wall -- Grace
 	//8. Drop wall -- Grace
+	
 	//9. Save position -- Shayne
+	/**
+	 * This method saves the current game as a text file, with the path selecged by the user.
+	 * @param newFileName String representing the name to be given to the text file being saved.
+	 * @param overWriteIsFalse Boolean representing whether to over write the file if it already exists.
+	 * @throws InvalidInputException
+	 * @author Shayne Leitman, 260688512
+	 */
+	public static void saveCurrentGame(String newFileName, Boolean overWriteIsFalse) throws InvalidInputException {
+		throw new InvalidInputException("Controller feature not fully implemented yet!");
+	}
+
 	//10. Load position -- Shayne
+	/**
+	 * This method loads a game from a text file, checking to see that it is a valid position
+	 * @param fileName String representing the name of the file taht you wish to import.
+	 * @throws InvalidInputException
+	 * @author Shayne Leitman, 260688512
+	 */
+	//Idea is to first create a new game (with the users, and time), then go in and set time for each player.
+	//Next, go move by move through the game, checking at each step if a move is alright.
+	public static void loadSavedGame(String fileName) throws InvalidInputException {
+		throw new InvalidInputException("Controller feature not fully implemented yet!");
+	}
+	
 	//11. Validate position --Sami
 	//12. Switch player (aka. Update board) --Sami
 
