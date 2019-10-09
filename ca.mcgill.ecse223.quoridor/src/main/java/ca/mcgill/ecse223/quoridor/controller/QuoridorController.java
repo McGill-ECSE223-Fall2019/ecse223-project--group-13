@@ -91,21 +91,35 @@ public class QuoridorController {
 	 * @throws InvalidInputException
 	 * @author Xinyue Chen, 260830761
 	 */
-	public static void moveWall(Wall wall, WallMove move) throws InvalidInputException {
-		Quoridor quoridor = QuoridorApplication.getQuoridor();
+	public static void moveWall(Player player, Wall wall, WallMove move) throws InvalidInputException {
+//		Quoridor quoridor = QuoridorApplication.getQuoridor();
+//		
+//		try {
+//			if(move.getTargetTile().getRow()>0&&move.getTargetTile().getRow()<9&&move.getTargetTile().getColumn()<9&&move.getTargetTile().getColumn()>0) {
+//				wall.setMove(move);
+//			}
+//			else {
+//				throw new InvalidInputException("You can't move the wall further.");
+//			}
+//		}
+//		catch (RuntimeException e) {
+//			throw new InvalidInputException(e.getMessage());
+//		}
 		
+		Quoridor quoridor = QuoridorApplication.getQuoridor();
 		try {
-			if(move.getTargetTile().getRow()>0&&move.getTargetTile().getRow()<9&&move.getTargetTile().getColumn()<9&&move.getTargetTile().getColumn()>0) {
-				wall.setMove(move);
-			}
-			else {
-				throw new InvalidInputException("You can't move the wall further.");
+			if(quoridor.getCurrentGame().hasWallMoveCandidate()) {
+				if(quoridor.getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn()>0&&quoridor.getCurrentGame().getWallMoveCandidate().getTargetTile().getRow()>0) {
+					
+				}
+				else {
+					throw new InvalidInputException("You can't move the wall further.");
+				}
 			}
 		}
 		catch (RuntimeException e) {
 			throw new InvalidInputException(e.getMessage());
 		}
-		
 		
 	}
 	
@@ -120,15 +134,24 @@ public class QuoridorController {
 	 * @author Xinyue Chen, 260830761
 	 */
 	public static void dropWall(Wall wall, WallMove move) throws InvalidInputException{
+//		try {
+//			if(move.getWallPlaced()==null) {
+//				wall.setMove(move);
+//			}
+//			else {
+//				throw new InvalidInputException("There is already a wall placed.");
+//			}
+//		}
+//		catch (RuntimeException e) {
+//			throw new InvalidInputException(e.getMessage());
+//		}
+		Quoridor quoridor = QuoridorApplication.getQuoridor();
 		try {
-			if(move.getWallPlaced()==null) {
-				wall.setMove(move);
-			}
-			else {
-				throw new InvalidInputException("There is already a wall placed.");
+			if() {
+				quoridor.getCurrentGame().getWallMoveCandidate().setWallPlaced(wall);
 			}
 		}
-		catch (RuntimeException e) {
+		catch (RuntimeException e){
 			throw new InvalidInputException(e.getMessage());
 		}
 		
