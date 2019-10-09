@@ -21,6 +21,8 @@ import ca.mcgill.ecse223.quoridor.model.WallMove;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import cucumber.api.java.en.When;
+
 
 public class CucumberStepDefinitions {
 
@@ -112,6 +114,22 @@ public class CucumberStepDefinitions {
 	 * are implemented
 	 * 
 	 */
+	
+	//Shayne's Step Definitions: Controller methods 9 and 10
+	
+	//Step Defs for Save Game:
+	@When("^The user initiates to save the game with name \"([^\"]*)\"$")
+	public void userInitiatesSaveGame(String fileName) {
+		saveCurrentGame(fileName, False);
+		//CHANGE THIS IF THE METHOD CHANGES INPUTS/OUTPUTS!!!
+	}
+	
+	
+	
+	
+	//Step Defs for Load Game:
+	
+	//End Shayne's Step Definitions
 
 	// ***********************************************
 	// Clean up
