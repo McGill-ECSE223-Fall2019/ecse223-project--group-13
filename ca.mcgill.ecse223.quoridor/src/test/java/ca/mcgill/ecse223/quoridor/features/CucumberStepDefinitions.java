@@ -4,7 +4,6 @@ import java.sql.Time;
 import java.util.List;
 import java.util.Map;
 
-import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.model.Board;
 import ca.mcgill.ecse223.quoridor.model.Direction;
@@ -22,9 +21,6 @@ import ca.mcgill.ecse223.quoridor.model.WallMove;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
-import io.cucumber.java.en.Then;
-
 
 public class CucumberStepDefinitions {
 
@@ -69,7 +65,9 @@ public class CucumberStepDefinitions {
 			Integer wcol = Integer.decode(map.get("wcol"));
 			// Wall to place
 			// Walls are placed on an alternating basis wrt. the owners
-			Wall wall = Wall.getWithId(playerIdx * 10 + wallIdxForPlayer);
+			//Wall wall = Wall.getWithId(playerIdx * 10 + wallIdxForPlayer);
+			Wall wall = players[playerIdx].getWall(wallIdxForPlayer); // above implementation sets wall to null
+
 
 			String dir = map.get("wdir");
 
@@ -116,22 +114,6 @@ public class CucumberStepDefinitions {
 	 * are implemented
 	 * 
 	 */
-	
-	//Shayne's Step Definitions: Controller methods 9 and 10
-	
-	//Step Defs for Save Game:
-	@When("^The user initiates to save the game with name \"([^\"]*)\"$")
-	public void userInitiatesSaveGame(String fileName) {
-		saveCurrentGame(fileName, false);
-		//CHANGE THIS IF THE METHOD CHANGES INPUTS/OUTPUTS!!!
-	}
-	
-	
-	
-	
-	//Step Defs for Load Game:
-	
-	//End Shayne's Step Definitions
 
 	// ***********************************************
 	// Clean up
@@ -140,8 +122,11 @@ public class CucumberStepDefinitions {
 	// After each scenario, the test model is discarded
 	@After
 	public void tearDown() {
-		quoridor.delete();
-		quoridor = null;
+		// Avoid null pointer for step definitions that are not yet implemented.
+		if (quoridor != null) {
+			quoridor.delete();
+			quoridor = null;
+		}
 	}
 
 	// ***********************************************
