@@ -4,6 +4,7 @@ import java.sql.Time;
 import java.util.List;
 import java.util.Map;
 
+import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
 import ca.mcgill.ecse223.quoridor.model.Board;
 import ca.mcgill.ecse223.quoridor.model.Direction;
@@ -21,7 +22,8 @@ import ca.mcgill.ecse223.quoridor.model.WallMove;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.When;
+import io.cucumber.java.en.Then;
 
 
 public class CucumberStepDefinitions {
@@ -120,7 +122,7 @@ public class CucumberStepDefinitions {
 	//Step Defs for Save Game:
 	@When("^The user initiates to save the game with name \"([^\"]*)\"$")
 	public void userInitiatesSaveGame(String fileName) {
-		saveCurrentGame(fileName, False);
+		saveCurrentGame(fileName, false);
 		//CHANGE THIS IF THE METHOD CHANGES INPUTS/OUTPUTS!!!
 	}
 	
