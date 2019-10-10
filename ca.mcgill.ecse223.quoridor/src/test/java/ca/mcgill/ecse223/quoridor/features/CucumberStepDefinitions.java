@@ -1,16 +1,21 @@
 package ca.mcgill.ecse223.quoridor.features;
 
+import static org.junit.Assert.assertEquals;
+
 import java.sql.Time;
 import java.util.List;
 import java.util.Map;
 
 import ca.mcgill.ecse223.quoridor.QuoridorApplication;
+import ca.mcgill.ecse223.quoridor.controller.InvalidInputException;
+import ca.mcgill.ecse223.quoridor.controller.QuoridorController;
 import ca.mcgill.ecse223.quoridor.model.Board;
 import ca.mcgill.ecse223.quoridor.model.Direction;
 import ca.mcgill.ecse223.quoridor.model.Game;
 import ca.mcgill.ecse223.quoridor.model.Game.GameStatus;
 import ca.mcgill.ecse223.quoridor.model.Game.MoveMode;
 import ca.mcgill.ecse223.quoridor.model.GamePosition;
+import ca.mcgill.ecse223.quoridor.model.Move;
 import ca.mcgill.ecse223.quoridor.model.Player;
 import ca.mcgill.ecse223.quoridor.model.PlayerPosition;
 import ca.mcgill.ecse223.quoridor.model.Quoridor;
@@ -20,7 +25,10 @@ import ca.mcgill.ecse223.quoridor.model.Wall;
 import ca.mcgill.ecse223.quoridor.model.WallMove;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.But;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
+import io.cucumber.java.en.Then;
 
 public class CucumberStepDefinitions {
 
@@ -30,24 +38,27 @@ public class CucumberStepDefinitions {
 	private Player player2;
 	private Player currentPlayer;
 	private Game game;
+	private Wall wall;
 
 	// ***********************************************
 	// Background step definitions
 	// ***********************************************
+	
+	
 
-	@Given("^The game is not running$")
+	@Given("The game is not running")
 	public void theGameIsNotRunning() {
 		initQuoridorAndBoard();
 		createUsersAndPlayers("user1", "user2");
 	}
 
-	@Given("^The game is running$")
+	@Given("The game is running")
 	public void theGameIsRunning() {
 		theGameIsNotRunning();
 		createAndStartGame();
 	}
 
-	@And("^It is my turn to move$")
+	@And("It is my turn to move")
 	public void itIsMyTurnToMove() throws Throwable {
 		currentPlayer = player1;
 		QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().setPlayerToMove(currentPlayer);
@@ -97,9 +108,16 @@ public class CucumberStepDefinitions {
 	}
 
 	@And("I do not have a wall in my hand")
-	public void iDoNotHaveAWallInMyHand() {
+	public void iDoNotHaveAWallInMyHand1() {
 		// Walls are in stock for all players
+		assert(currentPlayer.hasWalls()==false);
 	}
+	
+	@And("I have a wall in my hand over the board")
+	public void iHaveAWallInMyHandOverTheBoard() {
+		assert(currentPlayer.hasWalls()==true);
+	}
+	
 	
 	// ***********************************************
 	// Scenario and scenario outline step definitions
@@ -112,6 +130,91 @@ public class CucumberStepDefinitions {
 	 * are implemented
 	 * 
 	 */
+	
+	
+	@Given("A wall move candidate exists with <dir> at position (<row>, <col>)")
+	public void aWallMoveCandidateExistsWithDirectionAtPosition(int row, int col){
+		assert(quoridor.getCurrentGame().hasWallMoveCandidate());
+		WallMove candidate=quoridor.getCurrentGame().getWallMoveCandidate();
+		
+		
+	}
+	
+	@And("The wall candidate is not at the <side> edge of the board")
+	public void theWallCandidateIsNotAtTheEdgeOfTheBoard(Wall candidate) {
+		assert(candidate.)
+		
+	}
+	
+	@And("The wall candidate is at the <side> edge of the board")
+	public void theWallCandidateIsAtTheEdgeOfTheBoard(Wall candidate) {
+		
+		
+	}
+	
+	@When("I try to move the wall <side>")
+	public void iTryToMoveTheWall(WallMove move) {
+		QuoridorController.moveWall(currentPlayer, wall, move);
+	}
+	
+	@Then("The wall shall be moved over the board to position (<nrow>, <ncol>)")
+	public void theWallShallBeMovedOverTheBoardToPosition() {
+		
+	}
+	
+	@And("A wall move candidate shall exists with <dir> at position (<nrow>, <ncol>)")
+	public void aWallMoveCandidateShallExistsWithDirectionAtPosition() {
+		
+	}
+	
+	@Then("I should be notified that my move is illegal")
+	public void iShouldBeNotifiedThatMyMoveIsIllegal() {
+		throw new java.lang.UnsupportedOperationException("Your move is illegal.");
+		
+	}
+	
+	@Given("The wall move candidate with <dir> at position (<row>, <col>) is valid")
+	public void theWallMoveCandidateWithDirectionAtPositionIsValid() {
+		
+	}
+	
+	@When("I release the wall in my hand")
+	public void iReleaseTheWallInMyHand(WallMove move) throws UnsupportedOperationException {
+		QuoridorController.dropWall(currentPlayer, wall, move);
+	}
+	
+	@Then("I do not have a wall in my hand")
+	public void iDoNotHaveAWallInMyHand2() {
+		
+	}
+	
+	@But("A wall move is registered with <dir> at position (<row>, <col>)")
+	public void aWallMoveIsRegisteredWithDirectionAtPosition() {
+		
+	}
+	
+	
+	@And("My move is completed")
+	public void myMoveIsCompleted() {
+		
+	}
+	
+	@And("It is not my turn to move")
+	public void itIsNotMyTurnToMove() {
+		assert(quoridor.getCurrentGame().getCurrentPosition().getPlayerToMove()!=currentPlayer);
+	}
+	
+	@Then("I shall be notified that my wall move is invalid")
+	public void iShallBeNotifiedThatMyWallMoveIsInvalid() {
+		throw new java.lang.UnsupportedOperationException("Your move is invalid.");
+	}
+	
+	@But("No wall move is registered with <dir> at position (<row>, <col>)")
+	public void noWallMoveIsRegisteredWithDirectionAtPosition() {
+		
+	}
+	
+	
 
 	// ***********************************************
 	// Clean up
@@ -200,5 +303,8 @@ public class CucumberStepDefinitions {
 
 		game.setCurrentPosition(gamePosition);
 	}
+	
+	
+	
 
 }

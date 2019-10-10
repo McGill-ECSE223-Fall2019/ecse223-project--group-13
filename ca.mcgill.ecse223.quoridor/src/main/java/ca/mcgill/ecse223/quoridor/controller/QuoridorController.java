@@ -86,27 +86,16 @@ public class QuoridorController {
 	
 	/**
 	 * This method enables player to move around a wall on the board.
+	 * @param Player that is going to move the wall
 	 * @param Wall that the player intends to move
 	 * @param WallMove that player clicked on the arrow keys.
 	 * @throws InvalidInputException
 	 * @author Xinyue Chen, 260830761
 	 */
-	public static void moveWall(Player player, Wall wall, WallMove move) throws InvalidInputException {
+	public static void moveWall(Player player, Wall wall, WallMove move) throws UnsupportedOperationException {
 		
-		Quoridor quoridor = QuoridorApplication.getQuoridor();
-		try {
-			if(quoridor.getCurrentGame().hasWallMoveCandidate()) {
-				if(quoridor.getCurrentGame().getWallMoveCandidate().getTargetTile().getColumn()>0&&quoridor.getCurrentGame().getWallMoveCandidate().getTargetTile().getRow()>0) {
-					
-				}
-				else {
-					throw new InvalidInputException("You can't move the wall further.");
-				}
-			}
-		}
-		catch (RuntimeException e) {
-			throw new InvalidInputException(e.getMessage());
-		}
+		
+		throw new java.lang.UnsupportedOperationException("You can't move the wall further.");
 		
 	}
 	
@@ -115,22 +104,16 @@ public class QuoridorController {
 	
 	/**
 	 * This method enables player to drop a wall if there is no wall under it.
-	 * @param Wall that the player intends to move
+	 * @param Player that is going to drop the wall
+	 * @param Wall that the player intends to drop
 	 * @param WallMove that the wall is going to be placed
 	 * @throws InvalidInputException
 	 * @author Xinyue Chen, 260830761
 	 */
-	public static void dropWall(Wall wall, WallMove move) throws InvalidInputException{
+	public static void dropWall(Player player, Wall wall, WallMove move) throws UnsupportedOperationException{
 
-		Quoridor quoridor = QuoridorApplication.getQuoridor();
-		try {
-			if() {
-				quoridor.getCurrentGame().getWallMoveCandidate().setWallPlaced(wall);
-			}
-		}
-		catch (RuntimeException e){
-			throw new InvalidInputException(e.getMessage());
-		}
+		
+		throw new java.lang.UnsupportedOperationException("You can't drop the wall here, there is already a wall.");
 		
 		
 	}
