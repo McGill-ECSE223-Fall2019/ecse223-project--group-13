@@ -468,28 +468,64 @@ public class QuoridorBoardVisualizer extends JPanel {
 		}
 		
 		public void drawRotate(Graphics g) {
+			Player currentPlayer=QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+			Player whitePlayer = QuoridorApplication.getQuoridor().getCurrentGame().getWhitePlayer();
+			Player blackPlayer = QuoridorApplication.getQuoridor().getCurrentGame().getBlackPlayer();
+			Direction direction = QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().getWallDirection();
 			Graphics2D g2d = (Graphics2D) g.create();
 			BasicStroke thinStroke = new BasicStroke(1);
 			g2d.setStroke(thinStroke);
 			Boolean rotateIsClicked = QuoridorGamePage.getDirectionIsClicked();
 			if(rotateIsClicked =true) {
+				if(currentPlayer==whitePlayer) {
+				
 				Rectangle2D rec=rectanglesForWhiteWalls.get(indexCurrentWhiteWall);
 	
 				int x = -SQUAREWIDTH/2 + r*(SQUAREWIDTH + SPACING)+10;
 				int y = SQUAREWIDTH/2 + c*(SQUAREWIDTH + SPACING)+1;
 				int w = WALLHEIGHT;
 				int h = WALLWIDTH;
-				g2d.rotate(Math.toRadians(90));
+				
 				rec.setRect(x,y,w,h);
 				g2d.setColor(Color.PINK);
 				g2d.fill(rec);
 				g2d.setColor(Color.CYAN);
 				g2d.draw(rec);
-	}
+				if(direction==direction.Horizontal)
+					g2d.rotate(Math.toRadians(90));
+					QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setWallDirection(Direction.Vertical);
+				
+				if(direction==direction.Vertical)
+					g2d.rotate(Math.toRadians(90));
+					QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setWallDirection(Direction.Horizontal);
+				}
+				
+				else {
+				
+					Rectangle2D rec=rectanglesForBlackWalls.get(indexCurrentBlackWall);
+					
+					int x = -SQUAREWIDTH/2 + r*(SQUAREWIDTH + SPACING)+10;
+					int y = SQUAREWIDTH/2 + c*(SQUAREWIDTH + SPACING)+1;
+					int w = WALLHEIGHT;
+					int h = WALLWIDTH;
+					//g2d.rotate(Math.toRadians(90));
+					rec.setRect(x,y,w,h);
+					g2d.setColor(Color.PINK);
 
-
-
-	}
+					g2d.fill(rec);
+					g2d.setColor(Color.CYAN);
+					g2d.draw(rec);
+					if(direction==direction.Horizontal)
+						g2d.rotate(Math.toRadians(90));
+						QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setWallDirection(Direction.Vertical);
+					
+					if(direction==direction.Vertical)
+						g2d.rotate(Math.toRadians(90));
+						QuoridorApplication.getQuoridor().getCurrentGame().getWallMoveCandidate().setWallDirection(Direction.Horizontal);
+					}
+				}}
+				
+	
 
 	/**
 	 * method for drawing wall move on board
