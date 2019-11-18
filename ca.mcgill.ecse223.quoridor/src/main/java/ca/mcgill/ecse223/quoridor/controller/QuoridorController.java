@@ -1731,7 +1731,12 @@ public class QuoridorController {
 	 * @Author Shayne
 	 * @param dir
 	 */
-	public void movePawn (MoveDirection dir) {
+	public static void movePawn (MoveDirection dir) {
+		PawnBehavior pawnBehavior=new PawnBehavior();
+		Game game=QuoridorApplication.getQuoridor().getCurrentGame();
+		Player currentPlayer=QuoridorApplication.getQuoridor().getCurrentGame().getCurrentPosition().getPlayerToMove();
+		pawnBehavior.setPlayer(currentPlayer);
+		pawnBehavior.setCurrentGame(game);
 		switch (dir) {
 		//TODO: 
 		//case 
@@ -1743,7 +1748,7 @@ public class QuoridorController {
 	 * @Author Shayne
 	 * @param dir
 	 */
-	public void jumpPawn (MoveDirection dir) {
+	public static void jumpPawn (MoveDirection dir) {
 		switch (dir) {
 		//TODO: 
 		//case 
