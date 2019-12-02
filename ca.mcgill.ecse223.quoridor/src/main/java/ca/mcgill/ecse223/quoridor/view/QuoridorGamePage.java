@@ -1188,6 +1188,37 @@ public class QuoridorGamePage extends JFrame implements KeyListener{
 		refreshData(); //update game page
 	}
 	
+	/** 
+	 * forward/backward
+	 * 
+	 * */
+	private void stepForwardIsClicked(java.awt.event.ActionEvent evt) {
+		try{QuoridorController.stepForward();
+		jumpToFinal.setEnabled(true);
+		jumpToStart.setEnabled(true);
+		stepForward.setEnabled(true);
+		stepBackward.setEnabled(false);}
+		catch (Exception e) {
+			error = "The user is not in replay mode";
+		}
+		repaint(); 
+		refreshData();
+	}
+	
+	private void stepBackwardIsClicked(java.awt.event.ActionEvent evt) {
+		try{QuoridorController.stepBackward();
+		jumpToFinal.setEnabled(true);
+		jumpToStart.setEnabled(true);
+		stepForward.setEnabled(false);
+		stepBackward.setEnabled(true);}
+		catch (Exception e) {
+			error = "The user is not in replay mode";
+		}
+		
+		refreshData();
+		repaint(); 
+	}
+	
 	
 	/*****************************************/
 
@@ -1304,24 +1335,7 @@ public class QuoridorGamePage extends JFrame implements KeyListener{
 
 	}
 	
-	/** 
-	 * Replay
-	 * 
-	 * */
-	private void stepForwardIsClicked(java.awt.event.ActionEvent evt) {
-		try{QuoridorController.stepForward();}
-		catch (Exception e) {
-			error = "The user is not in replay mode";
-		}
-		
-	}
 	
-	private void stepBackwardIsClicked(java.awt.event.ActionEvent evt) {
-		try{QuoridorController.stepBackward();}
-		catch (Exception e) {
-			error = "The user is not in replay mode";
-		}
-	}
 
 	/**
 	 * helper methods below to receive/send messages to view
